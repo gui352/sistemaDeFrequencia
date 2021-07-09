@@ -1,84 +1,63 @@
-import React from 'react';
-import { Title, Repositories, Form } from './styles';
-import { FiChevronRight } from 'react-icons/fi';
+import { useState, FormEvent } from 'react';
+import { Barra, Cont, Title, Texto, Form, Repositories } from './styles';
+import {FiChevronRight} from 'react-icons/fi';
+import api from '../services/api';
 
+interface Repository{
+  state: string;
+  cases: BigInt;
+  deaths: BigInt;
+  suspects: BigInt;
+  refuses: BigInt;
+}
 
 const Dashboard: React.FC = () => {
+  const[newRepo, setNewRepo] = useState('');
+  const[repositories, setRepositories] = useState<Repository[]>([]);
+
+  async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void>{
+      event.preventDefault();
+
+      const response = await api.get<Repository>(`uf/${newRepo}`);
+      const repository = response.data;
+
+      setRepositories([...repositories, repository]);
+      setNewRepo('');
+  }
+  
   return (
     <>
-      <Title>Pesquisas de CNPJ</Title>
+      <Cont>
+        <Barra>
+          <div></div>
+        </Barra>  
+        <Title>Covid-19 Brasil</Title>
+        <Texto>Obtenha aqui informções em relação ao Covid-19 no Brasil</Texto>
 
-      <Form >
-        <input placeholder="Digite o nome do repositório"/>
-        <button type="submit">Pesquisar</button>
-      </Form>
+        <Form onSubmit={handleAddRepository}>
+          <input onChange={e => setNewRepo(e.target.value)} placeholder="Digite a UF do estado desejado" value={newRepo}/>
+          <button type="submit">Pesquisar</button>
+        </Form>
+      </Cont>
 
       <Repositories>
-
+        {repositories.map(repository => (
         <a href="teste">
             <img
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAABTCAMAAACS2miYAAAAY1BMVEUAXaT///8AXKQmaaoAWaI7cK1ghbj7/f4AUp+wv9gAV6EAR5uEn8UAVKCds9GZsM9mjLzt8fceYKZGc64ATZ0ASpz09/rY4u3V3Onk6fHF0+SSpsl/msN5lsHAzeGludQAQJjhcMDrAAABbklEQVRoge3Y7W6CMBSAYahDSwEZrnzIFL3/q9xcD12ltREcZ5Cc92c94SEmlIYgoCiKmt4bYgYrtogZblKFeJluQS6587mVbofpFvrZ5incyDmFTp1a6U6pp5MauviGXC6DMnCPVwHJXK3kUnjiauide2YcLmP9Bta7ST/C9+Bmrn0WYgJc4Rkil1xyF+DKUiV9rr1ZvOpmDezljYZt95B+3krd/9Ikl9chDJUeV52gKn0dLBeuTC65C3dF3KpijuoGXKo0i+TakUsuuStx2eZgh+DyemeH4oaPInclbjGvK9vmVhto91z/rHT6SO5wj8+43vNzAG9wphfE8JXueH6jj2HRZegG8IP5FXZUjv2KWZ94eW65aoi5LjnVtcts99XIJXfhLh9T0n8XTTxDJQxt5eCHu5uNR9WoSzbPDHXD9T033Ifb6993914gl9w5XMfxd65+P4F8FyFmnjcYYr59k6LWHOZzZD5Sm//pCxH1WZCU+n4JAAAAAElFTkSuQmCC"
-              alt="WEG"
+              src="https://static.mundoeducacao.uol.com.br/mundoeducacao/2021/02/2-bandeira-santa-catarina.jpg"
+              alt="SantaCatarina"
             />
             <div>
-              <strong>WEG S.A</strong><br/>
-              <strong>weg@net.com</strong><br/>
-              <strong>Jaraguá do Sul</strong>
-              <strong> - SC</strong><br/>
-              <strong>11.451.292/0001-03</strong><br/>
-              <p>Sistema de cadastro, edição, exclusão e listagem de produtos. Desenvolvido em Java</p>
+              <strong>{repository.state}</strong><br/>
+              <p>Casos: {repository.cases}</p><br/>
+              <p>Mortes: {repository.deaths}</p><br/>
+              <p>Suspeitos: {repository.suspects}</p><br/>
+              <p>Recusados: {repository.refuses}</p><br/>
             </div>
             <FiChevronRight size={20}/>
         </a>
-
-        <a href="teste">
-            <img
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAABTCAMAAACS2miYAAAAY1BMVEUAXaT///8AXKQmaaoAWaI7cK1ghbj7/f4AUp+wv9gAV6EAR5uEn8UAVKCds9GZsM9mjLzt8fceYKZGc64ATZ0ASpz09/rY4u3V3Onk6fHF0+SSpsl/msN5lsHAzeGludQAQJjhcMDrAAABbklEQVRoge3Y7W6CMBSAYahDSwEZrnzIFL3/q9xcD12ltREcZ5Cc92c94SEmlIYgoCiKmt4bYgYrtogZblKFeJluQS6587mVbofpFvrZ5incyDmFTp1a6U6pp5MauviGXC6DMnCPVwHJXK3kUnjiauide2YcLmP9Bta7ST/C9+Bmrn0WYgJc4Rkil1xyF+DKUiV9rr1ZvOpmDezljYZt95B+3krd/9Ikl9chDJUeV52gKn0dLBeuTC65C3dF3KpijuoGXKo0i+TakUsuuStx2eZgh+DyemeH4oaPInclbjGvK9vmVhto91z/rHT6SO5wj8+43vNzAG9wphfE8JXueH6jj2HRZegG8IP5FXZUjv2KWZ94eW65aoi5LjnVtcts99XIJXfhLh9T0n8XTTxDJQxt5eCHu5uNR9WoSzbPDHXD9T033Ifb6993914gl9w5XMfxd65+P4F8FyFmnjcYYr59k6LWHOZzZD5Sm//pCxH1WZCU+n4JAAAAAElFTkSuQmCC"
-              alt="WEG"
-            />
-            <div>
-              <strong>WEG S.A</strong><br/>
-              <strong>weg@net.com</strong><br/>
-              <strong>Jaraguá do Sul</strong>
-              <strong> - SC</strong><br/>
-              <strong>11.451.292/0001-03</strong><br/>
-              <p>Sistema de cadastro, edição, exclusão e listagem de produtos. Desenvolvido em Java</p>
-            </div>
-            <FiChevronRight size={20}/>
-        </a>
-
-        <a href="teste">
-            <img
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAABTCAMAAACS2miYAAAAY1BMVEUAXaT///8AXKQmaaoAWaI7cK1ghbj7/f4AUp+wv9gAV6EAR5uEn8UAVKCds9GZsM9mjLzt8fceYKZGc64ATZ0ASpz09/rY4u3V3Onk6fHF0+SSpsl/msN5lsHAzeGludQAQJjhcMDrAAABbklEQVRoge3Y7W6CMBSAYahDSwEZrnzIFL3/q9xcD12ltREcZ5Cc92c94SEmlIYgoCiKmt4bYgYrtogZblKFeJluQS6587mVbofpFvrZ5incyDmFTp1a6U6pp5MauviGXC6DMnCPVwHJXK3kUnjiauide2YcLmP9Bta7ST/C9+Bmrn0WYgJc4Rkil1xyF+DKUiV9rr1ZvOpmDezljYZt95B+3krd/9Ikl9chDJUeV52gKn0dLBeuTC65C3dF3KpijuoGXKo0i+TakUsuuStx2eZgh+DyemeH4oaPInclbjGvK9vmVhto91z/rHT6SO5wj8+43vNzAG9wphfE8JXueH6jj2HRZegG8IP5FXZUjv2KWZ94eW65aoi5LjnVtcts99XIJXfhLh9T0n8XTTxDJQxt5eCHu5uNR9WoSzbPDHXD9T033Ifb6993914gl9w5XMfxd65+P4F8FyFmnjcYYr59k6LWHOZzZD5Sm//pCxH1WZCU+n4JAAAAAElFTkSuQmCC"
-              alt="WEG"
-            />
-            <div>
-              <strong>WEG S.A</strong><br/>
-              <strong>weg@net.com</strong><br/>
-              <strong>Jaraguá do Sul</strong>
-              <strong> - SC</strong><br/>
-              <strong>11.451.292/0001-03</strong><br/>
-              <p>Sistema de cadastro, edição, exclusão e listagem de produtos. Desenvolvido em Java</p>
-            </div>
-            <FiChevronRight size={20}/>
-        </a>
-
-        <a href="teste">
-            <img
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAABTCAMAAACS2miYAAAAY1BMVEUAXaT///8AXKQmaaoAWaI7cK1ghbj7/f4AUp+wv9gAV6EAR5uEn8UAVKCds9GZsM9mjLzt8fceYKZGc64ATZ0ASpz09/rY4u3V3Onk6fHF0+SSpsl/msN5lsHAzeGludQAQJjhcMDrAAABbklEQVRoge3Y7W6CMBSAYahDSwEZrnzIFL3/q9xcD12ltREcZ5Cc92c94SEmlIYgoCiKmt4bYgYrtogZblKFeJluQS6587mVbofpFvrZ5incyDmFTp1a6U6pp5MauviGXC6DMnCPVwHJXK3kUnjiauide2YcLmP9Bta7ST/C9+Bmrn0WYgJc4Rkil1xyF+DKUiV9rr1ZvOpmDezljYZt95B+3krd/9Ikl9chDJUeV52gKn0dLBeuTC65C3dF3KpijuoGXKo0i+TakUsuuStx2eZgh+DyemeH4oaPInclbjGvK9vmVhto91z/rHT6SO5wj8+43vNzAG9wphfE8JXueH6jj2HRZegG8IP5FXZUjv2KWZ94eW65aoi5LjnVtcts99XIJXfhLh9T0n8XTTxDJQxt5eCHu5uNR9WoSzbPDHXD9T033Ifb6993914gl9w5XMfxd65+P4F8FyFmnjcYYr59k6LWHOZzZD5Sm//pCxH1WZCU+n4JAAAAAElFTkSuQmCC"
-              alt="WEG"
-            />
-            <div>
-              <strong>WEG S.A</strong><br/>
-              <strong>weg@net.com</strong><br/>
-              <strong>Jaraguá do Sul</strong>
-              <strong> - SC</strong><br/>
-              <strong>11.451.292/0001-03</strong><br/>
-              <p>Sistema de cadastro, edição, exclusão e listagem de produtos. Desenvolvido em Java</p>
-            </div>
-            <FiChevronRight size={20}/>
-        </a>
-
+         ))
+        }
       </Repositories>
     </>
   );
