@@ -4,22 +4,55 @@ import { shade } from 'polished';
 export const Barra = styled.div `
   width: 100%;
   height: 70px;
-  background:  #808080;
-  opacity: 0.2;
+  background-color: rgba(105, 105, 105, 0.3);
   position: fixed;
   z-index: 999;
 `;
 
-export const Bandeiras = styled.form`
+export const Bandeiras = styled.select`
+    width: 100px;
+    height: 40px;
+    background: #00CED1;
+    border-radius: 5px;
+    border: 0;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.3s;
+    float: right;
+    margin-right: 10px;
+    margin-top: 15px;
+    &:hover {
+      background: ${shade(0.3, '#00CED1')};
+    }
+`;
 
-`; 
+export const Option = styled.p`
+  text-align: center;
+  font-size: 25px;
+  color: #fff;
+  line-height: 70px;
+  float: left;
+  margin-left: 10px;
+  a:hover { 
+   text-decoration:none; 
+   color: #fff;
+  }
+  a:link { 
+    text-decoration:none;
+    color: #fff; 
+   }
+   a:visited{
+    text-decoration:none;
+    color: #fff;
+    }
+`;
 
 export const Cont = styled.div`
   width: 100%;
   height: 450px;
   background: #04d361;
   background-image: url("https://www.paho.org/sites/default/files/card/2021-03/covid-19-virus-aqua-bk.jpg");
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const Title = styled.h1`
@@ -70,24 +103,24 @@ export const Form = styled.form`
 `;
 
 export const Repositories = styled.div`
-  margin-left: 22%;
+  padding-left: 12%;
   margin-top: 20px;
-  max-width:700px;
+  display: flex; 
+  flex-wrap: wrap;
+  width:100%;
   a {
     background: #fff;
     border-radius: 5px;
-    width: 100%;
+    width: 30%;
+    margin-left: 30px;
     padding: 24px;
-    display: block;
     text-decoration: none;
     display: flex;
     align-items: center;
+    margin-bottom: 16px;
     transition: transform 0.2s;
     &:hover {
       transform: translate(10px);
-    }
-    & + a {
-      margin-top: 16px;
     }
     img {
       width: 80px;
