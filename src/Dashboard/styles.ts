@@ -111,8 +111,8 @@ export const Repositories = styled.div`
   a {
     background: #fff;
     border-radius: 5px;
-    width: 30%;
-    margin-left: 30px;
+    width: 50%;
+    margin-left: 155px;
     padding: 24px;
     text-decoration: none;
     display: flex;
@@ -123,8 +123,8 @@ export const Repositories = styled.div`
       transform: translate(10px);
     }
     img {
-      width: 80px;
-      height: 64px;
+      width: 100px;
+      height: 80px;
     }
     div {
        margin: 12px 16px;

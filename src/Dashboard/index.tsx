@@ -2,9 +2,15 @@ import { useState, FormEvent } from 'react';
 import { Barra, Cont, Title, Texto, Form, Repositories, Bandeiras, Option } from './styles';
 import {FiChevronRight} from 'react-icons/fi';
 import api from '../services/api';
+import { bandeiras } from "./bandeiras";
+
+interface estado {
+  uf: string;
+}
 
 interface Repository{
-  state: string;
+  uf: string;
+  state: estado;
   cases: BigInt;
   deaths: BigInt;
   suspects: BigInt;
@@ -13,7 +19,8 @@ interface Repository{
 
 const Dashboard: React.FC = () => {
   const[newRepo, setNewRepo] = useState('');
-  const[repositories, setRepositories] = useState<Repository[]>([]);
+  const[repositories, setRepositories] = useState<Repository>();
+  const [bandeira, setBandeira] = useState('');
 
   async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void>{
       event.preventDefault();
@@ -21,8 +28,14 @@ const Dashboard: React.FC = () => {
       const response = await api.get<Repository>(`uf/${newRepo}`);
       const repository = response.data;
 
-      setRepositories([...repositories, repository]);
+      setRepositories(repository);
       setNewRepo('');
+
+      for(var x = 0; x < bandeiras.length; x++){
+        if(String(repository?.uf) === bandeiras[x].uf){
+          setBandeira(bandeiras[x].link);
+        }
+      }
   }
   
   return (
@@ -34,7 +47,7 @@ const Dashboard: React.FC = () => {
           <Option> | </Option> 
           <Option><a href="https://www.gov.br/saude/pt-br/vacinacao?utm_source=google&utm_medium=search&utm_campaign=MS_Vacinacao_Covid&utm_term=vacinacao_coronavirus_googleads&utm_content=gads002">Notícias</a></Option>
           <Bandeiras>
-            <option >Select Country</option>
+            <option >Escolha um país</option>
             <option>BR</option>
             <option>US</option>
             <option>AU</option>
@@ -51,23 +64,20 @@ const Dashboard: React.FC = () => {
       </Cont>
       
       <Repositories>
-          {repositories.map(repository => (
             <a href="teste">
                 <img
-                  src="https://static.mundoeducacao.uol.com.br/mundoeducacao/2021/02/2-bandeira-santa-catarina.jpg"
-                  alt="SantaCatarina"
+                  src={bandeira}
+                  alt={repositories?.state.uf}
                 />
                 <div>
-                  <strong>{repository.state}</strong><br/>
-                  <p>Casos: {repository.cases}</p><br/>
-                  <p>Mortes: {repository.deaths}</p><br/>
-                  <p>Suspeitos: {repository.suspects}</p><br/>
-                  <p>Recusados: {repository.refuses}</p><br/>
+                  <strong>{repositories?.state}</strong><br/>
+                  <p>Casos: {repositories?.cases}</p><br/>
+                  <p>Mortes: {repositories?.deaths}</p><br/>
+                  <p>Suspeitos: {repositories?.suspects}</p><br/>
+                  <p>Recusados: {repositories?.refuses}</p><br/>
                 </div>
                 <FiChevronRight size={20}/>
             </a>
-            ))
-            }
         </Repositories>
     </>
   );
