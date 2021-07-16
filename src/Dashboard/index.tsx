@@ -1,8 +1,10 @@
 import { useState, FormEvent } from 'react';
-import { Barra, Cont, Title, Texto, Form, Repositories, Bandeiras, Option } from './styles';
+import { Barra, Cont, Title, Texto, Form, Error, Repositories, Bandeiras, Option, Info } from './styles';
 import {FiChevronRight} from 'react-icons/fi';
+import {Link} from 'react-router-dom';
 import api from '../services/api';
 import { bandeiras } from "./bandeiras";
+import { useEffect } from 'react';
 
 interface estado {
   uf: string;
@@ -19,23 +21,76 @@ interface Repository{
 
 const Dashboard: React.FC = () => {
   const[newRepo, setNewRepo] = useState('');
-  const[repositories, setRepositories] = useState<Repository>();
-  const [bandeira, setBandeira] = useState('');
+  const[inputError, setInputError] = useState('');
+  const [bandeira, setBandeira] = useState(() => {
+    const storageRepository = localStorage.getItem(
+        '@PesquisaCovid:saveflags'
+    );
+
+    if(storageRepository){
+      return JSON.parse(storageRepository);
+    }
+
+    return[];
+
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      '@PesquisaCovid:saveflags',
+      JSON.stringify(repositories)
+    )
+  });
+
+  const[repositories, setRepositories] = useState<Repository>(() => {
+    const storageRepository = localStorage.getItem(
+        '@PesquisaCovid:repositories'
+    );
+
+    if(storageRepository){
+      return JSON.parse(storageRepository);
+    }
+
+    return[];
+
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      '@PesquisaCovid:repositories',
+      JSON.stringify(repositories)
+    )
+  }, [repositories]);
 
   async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void>{
       event.preventDefault();
 
-      const response = await api.get<Repository>(`uf/${newRepo}`);
-      const repository = response.data;
-
-      setRepositories(repository);
-      setNewRepo('');
-
-      for(var x = 0; x < bandeiras.length; x++){
-        if(String(repository?.uf) === bandeiras[x].uf){
-          setBandeira(bandeiras[x].link);
-        }
+      if(!newRepo){
+        setInputError("Digite um estado válido para pesquisa. ");
+        return;
       }
+
+      try{
+        
+        const response = await api.get<Repository>(`uf/${newRepo}`);
+        const repository = response.data;
+
+        
+        setRepositories(repository);
+        setNewRepo('');
+        setInputError('');
+
+
+        for(var x = 0; x < bandeiras.length; x++){
+          if(String(repository?.uf) === bandeiras[x].uf){
+            setBandeira(bandeiras[x].link);
+          }
+        }
+
+      }catch(err){
+        setInputError("Repositório não encontrado ou inexistente. ");
+      }
+
   }
   
   return (
@@ -57,28 +112,44 @@ const Dashboard: React.FC = () => {
         <Title>Covid-19 Brasil</Title>
         <Texto>Obtenha aqui informções em relação ao Covid-19 no Brasil</Texto>
 
-        <Form onSubmit={handleAddRepository}>
+        <Form hasError={ !!inputError} onSubmit={handleAddRepository}>
           <input onChange={e => setNewRepo(e.target.value)} placeholder="Digite a UF do estado desejado" value={newRepo}/>
           <button type="submit">Pesquisar</button>
         </Form>
+
       </Cont>
+
+      {inputError && <Error>{inputError}</Error>}
       
-      <Repositories>
-            <a href="teste">
-                <img
-                  src={bandeira}
-                  alt={repositories?.state.uf}
-                />
-                <div>
-                  <strong>{repositories?.state}</strong><br/>
-                  <p>Casos: {repositories?.cases}</p><br/>
-                  <p>Mortes: {repositories?.deaths}</p><br/>
-                  <p>Suspeitos: {repositories?.suspects}</p><br/>
-                  <p>Recusados: {repositories?.refuses}</p><br/>
-                </div>
-                <FiChevronRight size={20}/>
-            </a>
+      {repositories ?
+
+        <Repositories>
+
+          <Link to={`/repository/${repositories.state}`}>
+              <img
+                src={bandeira}
+                alt={repositories?.uf}
+              />
+              <div>
+                <strong>{repositories?.state}</strong><br/>
+                <p>Casos: {repositories?.cases}</p><br/>
+                <p>Mortes: {repositories?.deaths}</p><br/>
+                <p>Suspeitos: {repositories?.suspects}</p><br/>
+                <p>Recusados: {repositories?.refuses}</p><br/>
+              </div>
+              <FiChevronRight size={20}/>
+          </Link>
+
         </Repositories>
+
+        :
+
+        <Info>
+          PESQUISE AQUI
+        </Info>
+
+      }
+      
     </>
   );
 };
