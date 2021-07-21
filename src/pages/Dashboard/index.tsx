@@ -2,7 +2,7 @@ import { useState, FormEvent } from 'react';
 import { Barra, Cont, Title, Texto, Form, Error, Repositories, Bandeiras, Option, Info } from './styles';
 import {FiChevronRight} from 'react-icons/fi';
 import {Link} from 'react-router-dom';
-import api from '../services/api';
+import api from '../../services/api';
 import { bandeiras } from "./bandeiras";
 import { useEffect } from 'react';
 
@@ -23,24 +23,22 @@ const Dashboard: React.FC = () => {
   const[newRepo, setNewRepo] = useState('');
   const[inputError, setInputError] = useState('');
   const [bandeira, setBandeira] = useState(() => {
-    const storageRepository = localStorage.getItem(
-        '@PesquisaCovid:saveflags'
-    );
+    const storageBandeira = localStorage.getItem('@Flag:bandeira');
 
-    if(storageRepository){
-      return JSON.parse(storageRepository);
-    }
+      if(storageBandeira) {
+        return JSON.parse(storageBandeira);
+      }
 
-    return[];
+    return '';
 
   });
 
   useEffect(() => {
     localStorage.setItem(
-      '@PesquisaCovid:saveflags',
-      JSON.stringify(repositories)
+      '@Flag:bandeira',
+      JSON.stringify(bandeira)
     )
-  });
+  }, [bandeira]);
 
   const[repositories, setRepositories] = useState<Repository>(() => {
     const storageRepository = localStorage.getItem(
@@ -66,20 +64,17 @@ const Dashboard: React.FC = () => {
       event.preventDefault();
 
       if(!newRepo){
-        setInputError("Digite um estado válido para pesquisa. ");
+        setInputError('Digite um estado válido para pesquisa. ');
         return;
       }
 
       try{
-        
-        const response = await api.get<Repository>(`uf/${newRepo}`);
+        const response = await api.get<Repository>(`${newRepo}`);
         const repository = response.data;
 
-        
         setRepositories(repository);
         setNewRepo('');
         setInputError('');
-
 
         for(var x = 0; x < bandeiras.length; x++){
           if(String(repository?.uf) === bandeiras[x].uf){
@@ -88,7 +83,7 @@ const Dashboard: React.FC = () => {
         }
 
       }catch(err){
-        setInputError("Repositório não encontrado ou inexistente. ");
+        setInputError('Repositório não encontrado ou inexistente. ');
       }
 
   }
@@ -112,19 +107,18 @@ const Dashboard: React.FC = () => {
         <Title>Covid-19 Brasil</Title>
         <Texto>Obtenha aqui informções em relação ao Covid-19 no Brasil</Texto>
 
-        <Form hasError={ !!inputError} onSubmit={handleAddRepository}>
-          <input onChange={e => setNewRepo(e.target.value)} placeholder="Digite a UF do estado desejado" value={newRepo}/>
+        <Form hasError={!!inputError} onSubmit={handleAddRepository}>
+          <input value={newRepo} onChange={e => setNewRepo(e.target.value)} placeholder="Digite a UF do estado desejado"/>
           <button type="submit">Pesquisar</button>
         </Form>
 
+        {inputError && <Error>{inputError}</Error>}
+
       </Cont>
-
-      {inputError && <Error>{inputError}</Error>}
       
-      {repositories ?
-
+      {repositories ?  
+      <>
         <Repositories>
-
           <Link to={`/repository/${repositories.state}`}>
               <img
                 src={bandeira}
@@ -139,17 +133,13 @@ const Dashboard: React.FC = () => {
               </div>
               <FiChevronRight size={20}/>
           </Link>
-
         </Repositories>
-
-        :
-
+      </>
+      :
         <Info>
           PESQUISE AQUI
         </Info>
-
-      }
-      
+      } 
     </>
   );
 };

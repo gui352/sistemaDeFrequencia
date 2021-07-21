@@ -117,8 +117,9 @@ export const Form = styled.form<FormProps>`
 
 export const Error = styled.span`
   display: block;
-  color: #c53030;
+  color: white;
   margin-top: 8px;
+  margin-left: 365px;
 `;
 
 export const Repositories = styled.div`
