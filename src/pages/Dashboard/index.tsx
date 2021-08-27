@@ -13,9 +13,8 @@ import {
 } from "./styles";
 import { FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import api from "../services/api";
+import api from "../../services/api";
 import { bandeiras } from "./bandeiras";
-import { repositorio } from "./repos";
 import { useEffect } from "react";
 
 interface estado {
@@ -47,20 +46,6 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     localStorage.setItem("@Flag:bandeira", JSON.stringify(bandeira));
   }, [bandeira]);
-
-  const [repos, setRepos] = useState(() => {
-    const storageRepos = localStorage.getItem("@Repos:repos");
-
-    if (storageRepos) {
-      return JSON.parse(storageRepos);
-    }
-
-    return "";
-  });
-
-  useEffect(() => {
-    localStorage.setItem("@Repos:repos", JSON.stringify(repos));
-  }, [repos]);
 
   const [repositories, setRepositories] = useState<Repository>(() => {
     const storageRepository = localStorage.getItem(
@@ -102,12 +87,6 @@ const Dashboard: React.FC = () => {
       for (var x = 0; x < bandeiras.length; x++) {
         if (String(repository?.uf) === bandeiras[x].uf) {
           setBandeira(bandeiras[x].link);
-        }
-      }
-
-      for (var y = 0; y < repositorio.length; y++) {
-        if (String(repository?.uf) === repositorio[y].uf) {
-          setRepos(repositorio[y].link);
         }
       }
     } catch (err) {
@@ -154,7 +133,9 @@ const Dashboard: React.FC = () => {
       {repositories ? (
         <>
           <Repositories>
-            <Link to={repos}>
+            
+            <Link to={`/repository/${repositories.state}`}>
+
               <img src={bandeira} alt={repositories?.uf} />
               <div>
                 <strong>{repositories?.state}</strong>
@@ -168,8 +149,10 @@ const Dashboard: React.FC = () => {
                 <p>Recusados: {repositories?.refuses}</p>
                 <br />
               </div>
-              <FiChevronRight size={20} to={repos} />
+              <FiChevronRight size={20} />
+
             </Link>
+            
           </Repositories>
         </>
       ) : (
