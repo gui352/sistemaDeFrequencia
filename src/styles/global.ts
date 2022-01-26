@@ -2,12 +2,13 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   * {
+    color:#EEEEE0;
     margin: 0;
     padding: 0;
     outline: 0;
   }
   body {
-    background: #E0FFFF;
+    background: #EEEEE0;
     -webkit-font-smoothing: antialiased;
   }
   body, input, button {
