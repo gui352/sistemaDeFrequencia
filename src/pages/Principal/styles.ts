@@ -6,14 +6,15 @@ export const Container = styled.div`
   width: 100%;
   height: 400px;
   background: #3CB371;
-  margin-bottom: 10px;
+  margin-bottom: 300px;
 
   .barra_superior{
     width: 100%;
     height: 70px;
-    background-color: #2F4F4F;
+    background: #2F4F4F;
     position: fixed;
     z-index: 999;
+    display: flex;
 
     img{
       width: 150px;
@@ -49,7 +50,8 @@ export const Container = styled.div`
       border: 0;
       font-weight: bold;
       transition: 0.3s;
-      float: right;
+      display: flex;
+      flex: row;
       margin-right: 10px;
       margin-top: 10px;
       &:hover {
@@ -58,14 +60,19 @@ export const Container = styled.div`
 
       p{
         font-size: 17px;
-        float: left;
+        flex: row;
         margin: 15px 10px 0px 10px;
       }
 
       svg{
-        margin: 10px 0px 0px 0px;
+        margin: 10px 0px 0px 5px;
       }
     }
+
+    .botao_cadastrar:first-child{
+      margin-left: 750px;
+    }
+
   }
 
   h1{
@@ -127,42 +134,46 @@ export const Error = styled.span`
 `;
 
 export const Repositories = styled.div`
-  heigth: 10px;
-  padding-left: 12%;
-  margin-top: 20px;
-  display: flex; 
-  flex-wrap: wrap;
+  height: 300px;
+  width: 550px;
+  border-radius: 3px;
+  padding: 12px;
+  margin: 30px 0px 0px 420px;
+  background: #2F4F4F;
 
-  a {
-    background: #fff;
-    border-radius: 5px;
-    width: 50%;
-    margin-left: 230px;
-    padding: 24px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    transition: transform 0.2s;
-    &:hover {
-      transform: translate(10px);
+  .container_dados {
+    height: 250px;
+    width: 550px;
+
+    #segura_dados{
+      display: flex;
+
+      .dados_aluno{
+        height: 185px;
+        width: 275px;
+        margin-top: 45px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: flex-start;
+        justify-content: space-between;
+  
+        p {
+          font-size: 20px;
+        }
+      }
     }
-    img {
-      width: 100px;
-      height: 80px;
+
+    strong {
+      font-size: 30px;
     }
-    div {
-       margin: 12px 16px;
-       flex: 1;
-       strong {
-         font-weigth: bold;
-         font-size:30px;
-         color: #3d3d4d;
-       }
-       p {
-        font-size: 25px;
-        color: #3d3d4d;
-       }
+
+    #editar{
+      margin-left: 390px;
+    }
+
+    #apagar{
+      margin-left: 15px;
     }
   }
 `;
