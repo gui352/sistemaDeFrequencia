@@ -1,19 +1,24 @@
-import React, { useState, useCallback } from "react";
-import { useModal } from 'react-hooks-use-modal';
+import React, { useState} from "react";
 
 import { Container, Form, Repositories } from "./styles";
-import { FiUserPlus, FiDatabase, FiEdit, FiTrash2 } from "react-icons/fi";
+import { FiUserPlus, FiDatabase, FiEdit, FiTrash2, FiXCircle } from "react-icons/fi";
 import Logo from "../../assets/LOGO_ESCOLA-S-1024x497.png";
 
 const Principal: React.FC = () => {
-  const [Modal, open, close, isOpen] = useModal('root', {
-    preventScroll: true,
-    closeOnOverlayClick: false
-  });
+  const [ abrePopUp, setAbrePopUp ] = useState(true);
+  const abrirPopUp = () => {
+    if(!abrePopUp){
+     setAbrePopUp(true);
+    }else{
+      setAbrePopUp(false);
+    }
+    return abrePopUp;
+  };
+
  
   return (
     <>
-      <Container>
+      <Container popup={abrirPopUp}>
         <div className="barra_superior">
           <img src={Logo} alt="Logo Escola S" />
           <text className="opc">|</text>
@@ -28,27 +33,23 @@ const Principal: React.FC = () => {
           </div>
           </a>
 
-          <div className="botao_cadastrar" onClick={open}>
-            <FiUserPlus size={30}/>
+          <div className="botao_cadastrar" onClick={() => abrirPopUp()}>
+            <FiUserPlus size={30} />
             <p className="cadastra">Cadastrar</p>
           </div>
         </div>
 
-        <Modal>
-          <div className="modal_cadastro">
-            <h1>Cadastrar Aluno</h1>
-            <input type="text" placeholder="Digite o nome do aluno..."/>
-            <input type="number" placeholder="Digite o número de cadastro..."/>
-            <input type="number" placeholder="Digite o CPF..."/>
-            <input type="date" placeholder="Digite a data de nascimento"/>
-            <input type="email" placeholder="Digite o email do aluno..."/>
-            <input type="phone" placeholder="Digite o telefone do aluno..."/>
-            <input type="text" placeholder="Digite o gênero do aluno..."/>
-            <input type="number" placeholder="Digite ID da turma do aluno..."/>
-            <p>This is a customizable modal.</p>
-            <button onClick={close}>Fechar</button>
+        <div id="popup" className="popup">
+          <div id="barra">
+            <FiXCircle onClick={() => abrirPopUp()}/>
+            <p>Cadastro de Alunos</p>
           </div>
-        </Modal>
+          <div className="columns helvetica cor_0 lighter" >
+            <div className="column1">
+              <input type="radio" id="vehicle1" name="vehicle1"/>
+            </div>
+          </div>
+        </div>
 
         <h1>Sistema de Presença</h1>
         <h5>Para procurar algum aluno em específico basta digitar o nome do mesmo abaixo</h5>
