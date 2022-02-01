@@ -177,8 +177,12 @@ export const Repositories = styled.div`
       font-size: 30px;
     }
 
+    #apagar{
+      margin-left: 15px;
+    }
+
     #editar{
-      margin-left: 280px;
+      margin-left: 250px;
     }
   }
 `;

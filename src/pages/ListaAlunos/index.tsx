@@ -1,6 +1,6 @@
 import React from "react";
 import { BsCheck } from "react-icons/bs";
-import { FiTrash2 } from "react-icons/fi";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { Container } from "./style";
 
 const ListaAlunos: React.FC = () =>{
@@ -15,6 +15,7 @@ const ListaAlunos: React.FC = () =>{
               <th className="description">Nome</th>
               <th className="turma">Turma</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -25,6 +26,11 @@ const ListaAlunos: React.FC = () =>{
               <td className="delete">
                 <FiTrash2 size={25}/>
               </td>
+              <td className="edit">
+                <a href="/editar">
+                  <FiEdit size={25}/>
+                </a>
+              </td>
             </tr>
             <tr>
               <td className="cadastro">2</td>
@@ -33,6 +39,11 @@ const ListaAlunos: React.FC = () =>{
               <td className="delete">
                 <FiTrash2 size={25}/>
               </td>
+              <td className="edit">
+                <a href="/editar">
+                  <FiEdit size={25}/>
+                </a>
+              </td>
             </tr>
             <tr>
               <td className="cadastro">3</td>
@@ -40,6 +51,11 @@ const ListaAlunos: React.FC = () =>{
               <td className="turma"> 400 </td>
               <td className="delete">
                 <FiTrash2 size={25}/>
+              </td>
+              <td className="edit">
+                <a href="/editar">
+                  <FiEdit size={25}/>
+                </a>
               </td>
             </tr>
           </tbody>

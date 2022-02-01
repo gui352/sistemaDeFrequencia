@@ -7,12 +7,13 @@ const Chamada: React.FC = () =>{
     <>
      <Container>
       <h2>Chamada</h2>
+      <input type="date" name="" id="data" />
         <table id="data-table">
           <thead>
             <tr>
               <th className="description">Nome</th>
               <th className="cadastro">Cadastro</th>
-              <th className="presente">Presente/Faltou</th>
+              <th className="presente">Presente</th>
             </tr>
           </thead>
           <tbody>

@@ -11,6 +11,17 @@ export const Container = styled.div`
     overflow: auto;
     color: #EEEEE0;
 
+    #data{
+        height: 30px;
+        width: 170px;
+        margin: 20px 0px;
+        border-radius: 3px;
+        border: none;
+        padding: 5px;
+        color:#2F4F4F;
+        font-size: 20px; 
+    }
+
     .botao_cadastrar{
         width: 140px;
         height: 50px;

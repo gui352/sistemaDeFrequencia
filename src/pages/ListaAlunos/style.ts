@@ -15,7 +15,7 @@ export const Container = styled.div`
         font-size: 30px;
         color: #EEEEE0;
     }
-
+    
     #data-table{
         width: 100%;
         border-spacing: 0 0.5rem;

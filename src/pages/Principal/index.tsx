@@ -45,10 +45,13 @@ const Principal: React.FC = () => {
         <Repositories>
           <div className="container_dados">
             <strong>Dados do Aluno</strong>
+
             <a href="/editar">
               <FiEdit size={25} id="editar"/>
             </a>
-        
+
+            <FiTrash2 size={25} id="apagar"/>
+          
             <div id="segura_dados">
               <div className="dados_aluno">
                 <p>Nome:</p>
