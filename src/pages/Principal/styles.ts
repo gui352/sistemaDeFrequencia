@@ -6,6 +6,11 @@ export const Container = styled.div`
   height: 400px;
   background: #3CB371;
   margin-bottom: 300px;
+  color: #EEEEE0;
+
+  a{
+    color: #EEEEE0;
+  }
 
   .barra_superior{
     width: 100%;
@@ -59,6 +64,7 @@ export const Container = styled.div`
         transition: 0.3s;
         display: flex;
         flex: row;
+        color: #EEEEE0;
   
         p{
           font-size: 17px;
@@ -122,6 +128,7 @@ export const Form = styled.form`
     border: 0;
     font-weight: bold;
     transition: 0.3s;
+    color: #EEEEE0;
     &:hover {
       background: ${shade(0.3, '#8FBC8F')};
     }
@@ -171,11 +178,7 @@ export const Repositories = styled.div`
     }
 
     #editar{
-      margin-left: 250px;
-    }
-
-    #apagar{
-      margin-left: 15px;
+      margin-left: 280px;
     }
   }
 `;

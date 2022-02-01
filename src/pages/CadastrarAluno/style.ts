@@ -8,6 +8,7 @@ export const Container = styled.div`
   padding: 12px;
   margin: 130px 0px 0px 350px;
   background: #2F4F4F;
+  color: #EEEEE0;
 
   .container_dados {
     height: 350px;

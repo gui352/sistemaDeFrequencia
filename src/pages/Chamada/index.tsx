@@ -12,8 +12,7 @@ const Chamada: React.FC = () =>{
             <tr>
               <th className="description">Nome</th>
               <th className="cadastro">Cadastro</th>
-              <th className="presente">Presente</th>
-              <th className="faltou">Faltou</th>
+              <th className="presente">Presente/Faltou</th>
             </tr>
           </thead>
           <tbody>
@@ -21,30 +20,21 @@ const Chamada: React.FC = () =>{
               <td className="description">João Silva</td>
               <td className="cadastro">1</td>
               <td className="chamada">
-                <input type="radio" name="opcao" value="op1"/>
-              </td>
-              <td className="chamada">
-                <input type="radio" name="opcao" value="op1"/>
+                <input type="checkbox"/>
               </td>
             </tr>
             <tr>
               <td className="description">Alana Camile</td>
               <td className="cadastro">2</td>
               <td className="chamada">
-                <input type="radio" name="opcao1" value="op1"/>
-              </td>
-              <td className="chamada">
-                <input type="radio" name="opcao1" value="op2"/>
+                <input type="checkbox"/>
               </td>
             </tr>
             <tr>
               <td className="description">Brendon Ribeiro</td>
               <td className="cadastro">3</td>
               <td className="chamada">
-                <input type="radio" name="opcao2" value="op1"/>
-              </td>
-              <td className="chamada">
-                <input type="radio" name="opcao2" value="op2"/>
+                <input type="checkbox"/>
               </td>
             </tr>
           </tbody>

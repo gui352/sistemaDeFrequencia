@@ -9,6 +9,7 @@ export const Container = styled.div`
     margin: 130px 0px 0px 350px;
     background: #2F4F4F;
     overflow: auto;
+    color: #EEEEE0;
 
     .botao_cadastrar{
         width: 140px;
@@ -95,10 +96,6 @@ export const Container = styled.div`
     }
 
     th.presente{
-        color: #12a454;
-    }
-
-    th.faltou{
-        color: #e92929;
+        color: #363f5f;
     }
 `;

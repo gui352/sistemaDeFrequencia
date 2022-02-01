@@ -48,8 +48,7 @@ const Principal: React.FC = () => {
             <a href="/editar">
               <FiEdit size={25} id="editar"/>
             </a>
-            
-            <FiTrash2 size={25} id="apagar"/>
+        
             <div id="segura_dados">
               <div className="dados_aluno">
                 <p>Nome:</p>
