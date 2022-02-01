@@ -1,11 +1,7 @@
 import styled, {css} from 'styled-components';
 import { shade } from 'polished';
 
-interface TablePops{
-  popup: boolean;
-}
-
-export const Container = styled.div<TablePops>`
+export const Container = styled.div`
   width: 100%;
   height: 400px;
   background: #3CB371;
@@ -18,6 +14,19 @@ export const Container = styled.div<TablePops>`
     position: fixed;
     z-index: 999;
     display: flex;
+
+    a:hover { 
+      text-decoration:none; 
+      color: #fff;
+    }
+
+    a:link { 
+      text-decoration:none;
+    }
+
+    a:visited{
+      text-decoration:none;
+    }
 
     img{
       width: 150px;
@@ -32,82 +41,39 @@ export const Container = styled.div<TablePops>`
       line-height: 70px;
       float: left;
       margin-left: 10px;
-      a:hover { 
-       text-decoration:none; 
-       color: #fff;
-      }
-      a:link { 
-        text-decoration:none;
-      }
-
-      a:visited{
-        text-decoration:none;
-      }
     }
 
-    .botao_cadastrar{
+    .separa_botao{
       width: 140px;
       height: 50px;
-      background: #8FBC8F;
-      border-radius: 3px;
-      border: 0;
-      font-weight: bold;
-      transition: 0.3s;
-      display: flex;
-      flex: row;
       margin-right: 10px;
       margin-top: 10px;
-      &:hover {
-        background: ${shade(0.1, '#8FBC8F')};
-      }
 
-      p{
-        font-size: 17px;
+      button{ 
+        width: 100%;
+        height: 100%;
+        background: #8FBC8F;
+        border-radius: 3px;
+        border: 0;
+        font-weight: bold;
+        transition: 0.3s;
+        display: flex;
         flex: row;
-        margin: 15px 10px 0px 10px;
-      }
-
-      svg{
-        margin: 10px 0px 0px 5px;
+  
+        p{
+          font-size: 17px;
+          flex: row;
+          margin: 15px 10px 0px 10px;
+        }
+  
+        svg{
+          margin: 10px 0px 0px 5px;
+        }
       }
     }
 
-    .botao_cadastrar:first-child{
+    .botao:first-child{
       margin-left: 750px;
-    }
-  }
-
-  .popup{
-    ${(props) =>
-      props.popup &&
-      css`
-      visibility: hidden;
-      opacity: 0;
-    `}
-    ${(props) =>
-      !props.popup &&
-      css`
-      visibility: visible;
-      opacity: 1;
-    `}
-    position: fixed;
-    top: 0; 
-    bottom: 0; 
-    left: 0; 
-    right:0;
-    margin: auto;
-    width: 400px;
-    height: 280px;
-    background: white;
-    border-radius: 3px;
-    box-shadow:0px 4px 4px rgb(0 0 0 / 25%);
-
-    #barra{
-      background-color: #00579D;
-      width: 100%;
-      height: 35px;
-      border-radius: 3px 3px 0px 0px;
-      cursor: pointer;
     }
   }
 
@@ -205,7 +171,7 @@ export const Repositories = styled.div`
     }
 
     #editar{
-      margin-left: 390px;
+      margin-left: 250px;
     }
 
     #apagar{
