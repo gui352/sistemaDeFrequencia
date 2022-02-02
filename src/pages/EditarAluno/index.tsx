@@ -21,7 +21,7 @@ let aluno = {
   telefone: 0,
   turma: 0,
   email: ""
-}
+};
 
 const EditarAluno: React.FC = () => {
   const {id} : {id:string} = useParams();
@@ -65,7 +65,7 @@ const EditarAluno: React.FC = () => {
         }
       }
 
-      await api.put("/aluno/editar/${id}", aluno);
+      await api.put(`/aluno/editar/${id}`, aluno);
     }catch(e){
       console.log(e)
     }
@@ -73,7 +73,7 @@ const EditarAluno: React.FC = () => {
 
   const handleAluno = async () => {
     try{
-        await api.get<Aluno>(`aluno/buscar/${id}`)
+        await api.get<Aluno>(`/aluno/buscar/${id}`)
         .then((response => {
             setAlunos(response.data);
         })).catch(() => console.log("Não passou"));
@@ -176,10 +176,12 @@ const EditarAluno: React.FC = () => {
               </div>
             </div>
           </div>
-          <button className="botao_cadastrar" onClick={() => editar()}>
-            <FiSave size={30} />
-            <p className="cadastra">Salvar</p>
-          </button>
+          <a href="/listaAlunos">
+            <button className="botao_cadastrar" onClick={() => editar()}>
+              <FiSave size={30} />
+              <p className="cadastra">Salvar</p>
+            </button>
+          </a>
         </div>  
       </Container>
     </>

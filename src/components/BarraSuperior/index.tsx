@@ -8,7 +8,7 @@ const BarraSuperior: React.FC = () => {
     return(
         <>
             <Container>
-                <img src={Logo} alt="Logo Escola S" />
+                <a href="/"><img src={Logo} alt="Logo Escola S" /></a>
                 <text className="opc">|</text>
 
                 <text className="opc"><a href="/chamada">Chamada </a></text>

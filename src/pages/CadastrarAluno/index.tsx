@@ -70,7 +70,7 @@ const CadastrarAluno: React.FC = () => {
             </div>
           </div>
           
-          <a href="/">
+          <a href="/listaAlunos">
             <button className="botao_cadastrar" onClick={() => cadastrar()}>
               <BsPeopleFill size={30} />
               <p className="cadastra">Cadastrar</p>

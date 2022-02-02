@@ -14,7 +14,7 @@ const Routes: React.FC = () => (
     <Route path="/chamada" component={Chamada}/>
     <Route path="/listaAlunos" component={ListaAlunos}/>
     <Route path="/cadastrar" component={CadastrarAluno}/>
-    <Route path="/editar" component={EditarAluno}/>
+    <Route path="/editar/:id" component={EditarAluno}/>
     <Route path="/listaChamada" component={ListaChamada}/>
   </Switch>
 );

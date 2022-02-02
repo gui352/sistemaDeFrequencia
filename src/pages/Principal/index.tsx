@@ -1,10 +1,29 @@
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 
 import { Container, Form, Repositories } from "./styles";
-import { FiEdit, FiTrash2, FiXCircle } from "react-icons/fi";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
 import BarraSuperior from "../../components/BarraSuperior";
 
+interface Aluno {
+  nome: string;
+  cpf: number;
+  turma: number;
+  email: string;
+  dataNascimento: string;
+  ncadastro: string;
+  telefone: number
+}
+
+interface Turma {
+  nomeTurma: string;
+  idTurma: number
+}
+
 const Principal: React.FC = () => {
+  const [newRepo, setNewRepo] = useState("");
+
+  
+
   return (
     <>
       <Container>

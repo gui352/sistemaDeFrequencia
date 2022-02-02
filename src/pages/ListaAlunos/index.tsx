@@ -17,7 +17,7 @@ const ListaAlunos: React.FC = () =>{
     api.get("/aluno/listar").then(response =>{
       setAlunos(response.data)
     });
-  }, []);
+  }, [alunos]);
 
   const deletar = async (id:number) => {
     try{
@@ -55,7 +55,7 @@ const ListaAlunos: React.FC = () =>{
                   <FiTrash2 size={25} onClick={() => deletar(aluno.ncadastro)}/>
                 </td>
                 <td className="edit">
-                  <a href={"/editar/${aluno.ncadastro}"}>
+                  <a href={`/editar/${aluno.ncadastro}`}>
                     <FiEdit size={25}/>
                   </a>
                 </td>
