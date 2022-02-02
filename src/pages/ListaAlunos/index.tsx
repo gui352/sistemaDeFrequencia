@@ -21,12 +21,12 @@ const ListaAlunos: React.FC = () =>{
 
   const deletar = async (id:number) => {
     try{
-    await api.delete<Aluno[]>(`aluno/apagar/${id}`)
-    .then((response => {
-      setAlunos(response.data);
-    })).catch(() => console.log("não passou"));
-    } catch(e) {
-    console.log(e)
+      await api.delete<Aluno[]>(`aluno/apagar/${id}`)
+      .then((response => {
+        setAlunos(response.data);
+      })).catch(() => console.log("não passou"));
+      } catch(e) {
+      console.log(e)
     }
   }
 

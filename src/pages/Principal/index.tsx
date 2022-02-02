@@ -1,8 +1,10 @@
-import React, { useEffect, useState} from "react";
+import React, { FormEvent, useEffect, useState} from "react";
 
 import { Container, Form, Repositories } from "./styles";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import BarraSuperior from "../../components/BarraSuperior";
+import api from "../../services/api";
+import { useParams } from "react-router-dom";
 
 interface Aluno {
   nome: string;
@@ -10,7 +12,7 @@ interface Aluno {
   turma: number;
   email: string;
   dataNascimento: string;
-  ncadastro: string;
+  ncadastro: number;
   telefone: number
 }
 
@@ -20,9 +22,19 @@ interface Turma {
 }
 
 const Principal: React.FC = () => {
-  const [newRepo, setNewRepo] = useState("");
+  const {id} : {id:string} = useParams();
+  const [alunos, setAlunos] = useState<Aluno[]>([]);
 
-  
+  const buscar = async (id:number) => {
+    try{
+      await api.delete<Aluno[]>(`aluno/buscar/${id}`)
+      .then((response => {
+        setAlunos(response.data);
+      })).catch(() => console.log("não passou"));
+      } catch(e) {
+      console.log(e)
+    }
+  }
 
   return (
     <>
