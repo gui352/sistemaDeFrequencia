@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import api from "../../services/api";
 import { Container } from "./style";
+import TopBar from "../../components/TopBar"
 
 interface Aluno {
   nome: string,
@@ -31,8 +32,9 @@ const ListaAlunos: React.FC = () =>{
 
   return(
     <>
-     <Container>
-      <h2>Alunos Cadastrados</h2>
+      <TopBar/>    
+      <Container>
+        <h2>Alunos Cadastrados</h2>
         <table id="data-table">
           <thead>
             <tr>

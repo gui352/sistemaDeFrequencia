@@ -3,6 +3,7 @@ import { FiSave} from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import { Container } from "./style";
+import TopBar from "../../components/TopBar";
 
 interface Aluno {
   nome: string;
@@ -136,6 +137,7 @@ const EditarAluno: React.FC = () => {
 
   return (
     <>
+      <TopBar/>
       <Container>
         <div className="container_dados">
           <strong>EDITAR ALUNO</strong>

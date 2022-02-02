@@ -6,6 +6,7 @@ import Chamada from "../pages/Chamada"
 import ListaAlunos from "../pages/ListaAlunos";
 import CadastrarAluno from "../pages/CadastrarAluno";
 import EditarAluno from "../pages/EditarAluno";
+import ListaChamada from "../pages/ListaChamada";
 
 const Routes: React.FC = () => (
   <Switch>
@@ -14,6 +15,7 @@ const Routes: React.FC = () => (
     <Route path="/listaAlunos" component={ListaAlunos}/>
     <Route path="/cadastrar" component={CadastrarAluno}/>
     <Route path="/editar" component={EditarAluno}/>
+    <Route path="/listaChamada" component={ListaChamada}/>
   </Switch>
 );
 

@@ -11,58 +11,24 @@ export const Container = styled.div`
     overflow: auto;
     color: #EEEEE0;
 
-    #segura{
-        display: flex;
-
-        svg{
-            color: #EEEEE0;
-            margin-left: 460px; 
-        }
-
-        h2{
-            font-size: 30px;
-            float: right;
-        }
+    a:hover { 
+      text-decoration:none; 
+      color: #fff;
     }
 
-    #data{
-        height: 30px;
-        width: 170px;
-        margin: 20px 0px;
-        border-radius: 3px;
-        border: none;
-        padding: 5px;
-        color:#2F4F4F;
-        font-size: 20px; 
+    a:link { 
+      text-decoration:none;
     }
 
-    .botao_cadastrar{
-        width: 140px;
-        height: 50px;
-        background: #8FBC8F;
-        border-radius: 3px;
-        border: 0;
-        font-weight: bold;
-        transition: 0.3s;
-        display: flex;
-        flex: row;
-        margin: 20px 0px 0px 510px;
-        &:hover {
-          background: ${shade(0.1, '#8FBC8F')};
-        }
+    a:visited{
+      text-decoration:none;
+    }
+
+    h2{
+        font-size: 30px;
+        color: #EEEEE0;
+    }
     
-        p{
-          font-size: 17px;
-          flex: row;
-          margin: 15px 10px 0px 10px;
-        }
-    
-        svg{
-          margin: 10px 0px 0px 5px;
-        }
-      }
-    }
-
     #data-table{
         width: 100%;
         border-spacing: 0 0.5rem;
@@ -101,7 +67,7 @@ export const Container = styled.div`
         color: #363f5f;
     }
     
-    td.chamada{
+    td.turma{
         color: #363f5f;
     }
     
@@ -117,7 +83,11 @@ export const Container = styled.div`
         color: #363f5f;
     }
 
-    th.presente{
+    th.turma{
         color: #363f5f;
+    }
+
+    td.delete{
+        color: #e92929;
     }
 `;

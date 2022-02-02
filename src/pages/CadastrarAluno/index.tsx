@@ -2,7 +2,7 @@ import React from "react";
 import { BsPeopleFill } from "react-icons/bs";
 import { Container } from "./style"
 import api from "../../services/api";
-import BarraSuperior from "../../components/BarraSuperior";
+import TopBar from "../../components/TopBar";
 
 const CadastrarAluno: React.FC = () => {
 
@@ -14,6 +14,7 @@ const CadastrarAluno: React.FC = () => {
     telefone: 0,
     turma: 0 
   }
+  
   async function cadastrar(): Promise<void> {
     aluno.nome = (document.getElementById("nome") as HTMLInputElement).value;
     aluno.cpf = parseInt((document.getElementById("cpf") as HTMLInputElement).value);
@@ -29,6 +30,7 @@ const CadastrarAluno: React.FC = () => {
 
   return (
     <>
+      <TopBar/>
       <Container>
         <div className="container_dados">
           <strong>CADASTRAR ALUNO</strong>
