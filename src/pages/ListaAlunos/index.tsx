@@ -6,7 +6,7 @@ import TopBar from "../../components/TopBar"
 
 interface Aluno {
   nome: string,
-  ncadastro: number,
+  cadastro: number,
   turma: number
 }
 
@@ -48,14 +48,14 @@ const ListaAlunos: React.FC = () =>{
           <tbody>
             {alunos.length > 0 ? alunos.map(aluno =>(
               <tr>
-                <td className="cadastro">{aluno.ncadastro}</td>
+                <td className="cadastro">{aluno.cadastro}</td>
                 <td className="description">{aluno.nome}</td>
                 <td className="turma">{aluno.turma}</td>
                 <td className="delete" >
-                  <FiTrash2 size={25} onClick={() => deletar(aluno.ncadastro)}/>
+                  <FiTrash2 size={25} onClick={() => deletar(aluno.cadastro)}/>
                 </td>
                 <td className="edit">
-                  <a href={`/editar/${aluno.ncadastro}`}>
+                  <a href={`/editar/${aluno.cadastro}`}>
                     <FiEdit size={25}/>
                   </a>
                 </td>

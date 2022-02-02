@@ -6,8 +6,9 @@ import TopBar from "../../components/TopBar"
 
 interface Presenca {
   dataChamada: string;
-  idAluno: number;
-  presenca: boolean
+  idaluno: number;
+  presenca: boolean;
+  nomeAluno: string
 }
 
 const ListaChamada: React.FC = () =>{
@@ -35,17 +36,17 @@ const ListaChamada: React.FC = () =>{
         <table id="data-table">
           <thead>
             <tr>
-              <th className="cadastro">Data</th>
               <th className="description">Aluno</th>
+              <th className="cadastro">Data</th>
               <th className="turma">Presença</th>
             </tr>
           </thead>
           <tbody>
             {presenca.length > 0 ? presenca.map(presente =>(
               <tr>
+                <td className="description">{presente.nomeAluno}</td>
                 <td className="cadastro">{presente.dataChamada}</td>
-                <td className="description">{presente.idAluno}</td>
-                <td className="turma">{presente.presenca ? "P" : "F"}</td>
+                <td className="turma">{presente.presenca ? "Presente" : "Faltou"}</td>
               </tr>
             )): ""}
           </tbody>

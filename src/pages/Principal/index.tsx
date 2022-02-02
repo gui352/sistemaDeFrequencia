@@ -13,17 +13,14 @@ interface Aluno {
   email: string;
   dataNascimento: string;
   ncadastro: number;
-  telefone: number
-}
-
-interface Turma {
-  nomeTurma: string;
-  idTurma: number
+  telefone: number;
+  frequencia: number
 }
 
 const Principal: React.FC = () => {
   const [pesquisa, setPesquisa] = useState<Aluno[]>([]);
 
+  const [valor, setValor] = useState("");
 
 
   return (
@@ -34,8 +31,8 @@ const Principal: React.FC = () => {
         <h5>Para procurar algum aluno em específico basta digitar o ID do mesmo abaixo</h5>
 
         <div className="campo_pesquisa">
-          <input placeholder="Digite o ID aqui..."/>
-          <button type="submit" >Pesquisar</button>
+          <input placeholder="Digite o ID aqui..."  value={valor} onChange={event => setValor(event.target.value)}/>
+          <button type="submit">Pesquisar</button>
         </div>
 
         <Repositories>

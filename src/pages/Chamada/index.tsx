@@ -7,14 +7,14 @@ import TopBar from "../../components/TopBar";
 import api from "../../services/api";
 
 interface Aluno {
-  ncadastro: number;
+  cadastro: number;
   nome: string;
   turma: number
 }
 
 interface Presenca {
   dataChamada: string;
-  idAluno: number;
+  idaluno: number;
   presenca: boolean
 }
 
@@ -36,10 +36,10 @@ const Chamada: React.FC = () =>{
     console.log(presenca);
     presenca.splice(0, presenca.length);
     alunos.map(aluno => {
-      if(alunosMarcados.find(alunoFind => alunoFind.id === aluno.ncadastro)){
-        presenca.push({dataChamada:(document.getElementById("data") as HTMLInputElement).value, presenca: true, idAluno: aluno.ncadastro});
+      if(alunosMarcados.find(alunoFind => alunoFind.id === aluno.cadastro)){
+        presenca.push({dataChamada:(document.getElementById("data") as HTMLInputElement).value, presenca: true, idaluno: aluno.cadastro});
       }else{
-        presenca.push({dataChamada:(document.getElementById("data") as HTMLInputElement).value, presenca: false, idAluno: aluno.ncadastro});
+        presenca.push({dataChamada:(document.getElementById("data") as HTMLInputElement).value, presenca: false, idaluno: aluno.cadastro});
       }
     })
     console.log(presenca)
@@ -86,8 +86,8 @@ const Chamada: React.FC = () =>{
         <table id="data-table">
           <thead>
             <tr>
-              <th className="description">Nome</th>
-              <th className="cadastro">Cadastro</th>
+              <th className="description">Cadastro</th>
+              <th className="cadastro">Nome</th>
               <th className="cadastro">Turma</th>
               <th className="presente">Presente</th>
             </tr>
@@ -95,11 +95,11 @@ const Chamada: React.FC = () =>{
           <tbody>
             {alunos.length > 0 ? alunos.map(aluno => (
               <tr>
-                <td className="cadastro">{aluno.ncadastro}</td>
+                <td className="cadastro">{aluno.cadastro}</td>
                 <td className="description">{aluno.nome}</td>
                 <td className="cadastro">{aluno.turma}</td>
                 <td className="chamada">
-                  <input type="checkbox" onClick={() => MarcarAluno(aluno.ncadastro)}/>
+                  <input type="checkbox" onClick={() => MarcarAluno(aluno.cadastro)}/>
                 </td>
               </tr>
             )): ""}
