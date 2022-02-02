@@ -1,9 +1,34 @@
-import React from "react";
-import { BsCheck } from "react-icons/bs";
+import React, { useEffect, useState } from "react";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
+import api from "../../services/api";
 import { Container } from "./style";
 
+interface Aluno {
+  nome: string,
+  ncadastro: number,
+  turma: number
+}
+
 const ListaAlunos: React.FC = () =>{
+  const [alunos, setAlunos] = useState<Aluno[]>([]);
+
+  useEffect(() =>{
+    api.get("/aluno/listar").then(response =>{
+      setAlunos(response.data)
+    });
+  }, []);
+
+  const deletar = async (id:number) => {
+    try{
+    await api.delete<Aluno[]>(`aluno/apagar/${id}`)
+    .then((response => {
+      setAlunos(response.data);
+    })).catch(() => console.log("não passou"));
+    } catch(e) {
+    console.log(e)
+    }
+  }
+
   return(
     <>
      <Container>
@@ -19,45 +44,21 @@ const ListaAlunos: React.FC = () =>{
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="cadastro">1</td>
-              <td className="description">João Silva</td>
-              <td className="turma"> 200 </td>
-              <td className="delete">
-                <FiTrash2 size={25}/>
-              </td>
-              <td className="edit">
-                <a href="/editar">
-                  <FiEdit size={25}/>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td className="cadastro">2</td>
-              <td className="description">Alana Camile</td>
-              <td className="turma"> 100 </td>
-              <td className="delete">
-                <FiTrash2 size={25}/>
-              </td>
-              <td className="edit">
-                <a href="/editar">
-                  <FiEdit size={25}/>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td className="cadastro">3</td>
-              <td className="description">Brendon Ribeiro</td>
-              <td className="turma"> 400 </td>
-              <td className="delete">
-                <FiTrash2 size={25}/>
-              </td>
-              <td className="edit">
-                <a href="/editar">
-                  <FiEdit size={25}/>
-                </a>
-              </td>
-            </tr>
+            {alunos.length > 0 ? alunos.map(aluno =>(
+              <tr>
+                <td className="cadastro">{aluno.ncadastro}</td>
+                <td className="description">{aluno.nome}</td>
+                <td className="turma">{aluno.turma}</td>
+                <td className="delete" >
+                  <FiTrash2 size={25} onClick={() => deletar(aluno.ncadastro)}/>
+                </td>
+                <td className="edit">
+                  <a href={"/editar/${aluno.ncadastro}"}>
+                    <FiEdit size={25}/>
+                  </a>
+                </td>
+              </tr>
+            )): ""}
           </tbody>
         </table>
       </Container>
