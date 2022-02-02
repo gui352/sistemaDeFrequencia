@@ -1,6 +1,6 @@
-import React, { FormEvent, useEffect, useState} from "react";
+import React, { useState} from "react";
 
-import { Container, Form, Repositories } from "./styles";
+import { Container, Repositories } from "./styles";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import BarraSuperior from "../../components/BarraSuperior";
 import api from "../../services/api";
@@ -22,19 +22,9 @@ interface Turma {
 }
 
 const Principal: React.FC = () => {
-  const {id} : {id:string} = useParams();
-  const [alunos, setAlunos] = useState<Aluno[]>([]);
+  const [pesquisa, setPesquisa] = useState<Aluno[]>([]);
 
-  const buscar = async (id:number) => {
-    try{
-      await api.delete<Aluno[]>(`aluno/buscar/${id}`)
-      .then((response => {
-        setAlunos(response.data);
-      })).catch(() => console.log("não passou"));
-      } catch(e) {
-      console.log(e)
-    }
-  }
+
 
   return (
     <>
@@ -43,10 +33,10 @@ const Principal: React.FC = () => {
         <h1>Sistema de Presença</h1>
         <h5>Para procurar algum aluno em específico basta digitar o ID do mesmo abaixo</h5>
 
-        <Form >
+        <div className="campo_pesquisa">
           <input placeholder="Digite o ID aqui..."/>
-          <button type="submit">Pesquisar</button>
-        </Form>
+          <button type="submit" >Pesquisar</button>
+        </div>
 
         <Repositories>
           <div className="container_dados">

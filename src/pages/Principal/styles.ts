@@ -25,41 +25,41 @@ export const Container = styled.div`
     line-height: 56px; 
     font-weight: light;
   }
-`;
 
-export const Form = styled.form`
-  margin-top: 40px;
-  max-width: 700px;
-  display: flex;
-  margin-left: 27%;
-  input {
-    flex: 1;
-    height: 46px;
-    padding: 0 24px;
-    border: 0;
-    border-radius: 3px 0 0 3px;
-    color: #3a3a3a;
-    font-size: 16px;
-    background: #EEEEE0;
-    border: 2px solid #EEEEE0;
+  .campo_pesquisa{
+    margin-top: 40px;
+    max-width: 700px;
+    display: flex;
+    margin-left: 27%;
+    input {
+      flex: 1;
+      height: 46px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 3px 0 0 3px;
+      color: #3a3a3a;
+      font-size: 16px;
+      background: #EEEEE0;
+      border: 2px solid #EEEEE0;
 
-    &::placeholder {
-      color: #a8a8b3;
+      &::placeholder {
+        color: #a8a8b3;
+      }
+
     }
 
-  }
-
-  button {
-    width: 210px;
-    height: 50px;
-    background: #8FBC8F;
-    border-radius: 0 3px 3px 0;
-    border: 0;
-    font-weight: bold;
-    transition: 0.3s;
-    color: #EEEEE0;
-    &:hover {
-      background: ${shade(0.3, '#8FBC8F')};
+    button {
+      width: 210px;
+      height: 50px;
+      background: #8FBC8F;
+      border-radius: 0 3px 3px 0;
+      border: 0;
+      font-weight: bold;
+      transition: 0.3s;
+      color: #EEEEE0;
+      &:hover {
+        background: ${shade(0.3, '#8FBC8F')};
+      }
     }
   }
 `;

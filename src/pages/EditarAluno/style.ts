@@ -13,7 +13,23 @@ export const Container = styled.div`
   .container_dados {
     height: 350px;
     width: 600px;
-    padding: 20px 0px 0px 15px;;
+    padding: 20px 0px 0px 15px;
+
+    a:hover { 
+      text-decoration:none; 
+      color: #EEEEE0;
+    }
+
+    a:link { 
+      text-decoration:none;
+      color: #EEEEE0;
+    }
+
+    a:visited{
+      text-decoration:none;
+      color: #EEEEE0;
+    }
+
 
     #segura_dados{
       display: flex;
@@ -90,6 +106,7 @@ export const Container = styled.div`
     display: flex;
     flex: row;
     margin: 20px 0px 0px 450px;
+    color: #EEEEE0;
     &:hover {
       background: ${shade(0.1, '#8FBC8F')};
     }

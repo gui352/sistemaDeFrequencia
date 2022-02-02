@@ -10,15 +10,17 @@ export const Container = styled.div`
 
     a:hover { 
       text-decoration:none; 
-      color: #fff;
+      color: #EEEEE0;
     }
 
     a:link { 
       text-decoration:none;
+      color: #EEEEE0;
     }
 
     a:visited{
       text-decoration:none;
+      color: #EEEEE0;
     }
 
     img{

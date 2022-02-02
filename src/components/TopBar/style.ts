@@ -9,16 +9,19 @@ export const Container = styled.div`
 
     a:hover { 
       text-decoration:none; 
-      color: #fff;
+      color: #EEEEE0;
     }
 
     a:link { 
       text-decoration:none;
+      color: #EEEEE0;
     }
 
     a:visited{
       text-decoration:none;
+      color: #EEEEE0;
     }
+
 
     img{
       width: 150px;
@@ -33,6 +36,7 @@ export const Container = styled.div`
       line-height: 70px;
       float: left;
       margin-left: 10px;
+      color: #EEEEE0;
     }
 
     .separa_botao{

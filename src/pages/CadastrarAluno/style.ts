@@ -13,7 +13,22 @@ export const Container = styled.div`
   .container_dados {
     height: 350px;
     width: 600px;
-    padding: 20px 0px 0px 15px;;
+    padding: 20px 0px 0px 15px;
+
+    a:hover { 
+      text-decoration:none; 
+      color: #EEEEE0;
+    }
+
+    a:link { 
+      text-decoration:none;
+      color: #EEEEE0;
+    }
+
+    a:visited{
+      text-decoration:none;
+      color: #EEEEE0;
+    }
 
     #segura_dados{
       display: flex;
@@ -51,17 +66,17 @@ export const Container = styled.div`
         }
 
         input{
-            border-radius:5px;
-            border: 1px;
-            padding: 5px;
-            flex: 1;
-            background: transparent;
-            border: 0;
-            color: #EEEEE0;
+          border-radius:5px;
+          border: 1px;
+          padding: 5px;
+          flex: 1;
+          background: transparent;
+          border: 0;
+          color: #EEEEE0;
 
-            &::placeholder{
-                color: #EEEEE0;
-            }
+          &::placeholder{
+             color: #EEEEE0;
+          }
         }
       }
     }
