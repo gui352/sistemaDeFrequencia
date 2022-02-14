@@ -40,6 +40,18 @@ const Principal: React.FC = () => {
     
   }
 
+  const deletar = async () => {
+    let pegaId = parseInt((document.getElementById("pesquisa") as HTMLInputElement).value);
+    try{
+      await api.delete(`aluno/apagar/${pegaId}`)
+      .then((response => {
+        setPesquisa(response.data);
+      })).catch(() => console.log("não passou"));
+      } catch(e) {
+      console.log(e)
+    }
+  }
+
   return (
     <>
       <Container>
@@ -56,11 +68,11 @@ const Principal: React.FC = () => {
           <div className="container_dados">
             <strong>Dados do Aluno</strong>
 
-            <a href="/editar">
+            <a href={`/editar/${pesquisa?.cadastro}`}>
               <FiEdit size={25} id="editar"/>
             </a>
 
-            <FiTrash2 size={25} id="apagar"/>
+            <FiTrash2 size={25} id="apagar" onClick={() => deletar()}/>
 
               <div id="segura_dados">
                 <div className="dados_aluno">
