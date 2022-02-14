@@ -11,6 +11,21 @@ export const Container = styled.div`
     overflow: auto;
     color: #EEEEE0;
 
+    a:hover { 
+        text-decoration:none; 
+        color: #EEEEE0;
+    }
+
+    a:link { 
+        text-decoration:none;
+        color: #EEEEE0;
+    }
+
+    a:visited{
+        text-decoration:none;
+        color: #EEEEE0;
+    }
+
     #segura{
         display: flex;
 

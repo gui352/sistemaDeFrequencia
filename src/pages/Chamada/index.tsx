@@ -105,10 +105,12 @@ const Chamada: React.FC = () =>{
             )): ""}
           </tbody>
         </table>
-        <div className="botao_cadastrar" onClick={() => SalvarChamada()}>
-            <BsCheck size={30} />
-            <p className="cadastra">Finalizar</p>
-        </div>
+        <a href="/listaChamada">
+          <div className="botao_cadastrar" onClick={() => SalvarChamada()}>
+              <BsCheck size={30} />
+              <p className="cadastra">Finalizar</p>
+          </div>
+        </a>
       </Container>
     </>
   );
